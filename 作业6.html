@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container{
+            width: 80%;
+            margin: 0 auto;
+            background: #cccccc;
+            text-align: center;
+            height: 100px;
+        }
+        .container::before{
+            content: '';
+            display: inline-block;
+            vertical-align: middle;
+            height: 100%;
+        }
+
+        .button{
+            background: red;
+            border: 0px;
+            color: white;
+            display: inline-block;
+            padding: 2px 5px;
+            border-radius: 5px;
+            vertical-align: middle;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="button">按钮1</div>
+        <div class="button">按钮2</div>
+        <div class="button">按钮3</div>
+
+    </div>
+
+
+</body>
+</html>
