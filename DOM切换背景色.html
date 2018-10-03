@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .content {
+            padding: 10px;
+            box-shadow: 1px 1px 2px 2px rgba(0,0,0,0.14)
+        }
+
+        .content.active {
+            background: #000;
+            color: #fff;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="content">
+        <h1>hello</h1>
+        <div>jirengu</div>
+    </div>
+    <div>
+        <button id="add">add</button>
+        <button id="remove">remove</button>
+        <button id="toggle1">toggle1</button>
+        <button id="toggle2">toggle2</button>
+
+    </div>
+
+    <script>
+
+        var add = document.getElementById("add")
+        var remove = document.getElementById("remove")
+        var toggle1 = document.getElementById("toggle1")
+        var toggle2 = document.getElementById("toggle2")
+        var content = document.querySelector(".content")
+
+
+        add.onclick =  function(){
+            content.classList.add("active")
+        }
+
+        remove.onclick =  function(){
+            content.classList.remove("active")
+        }
+
+        toggle1.onclick = function(){
+            if(content.classList.contains("active"))
+                content.classList.remove("active")
+            else
+                content.classList.add("active")
+        }
+
+        toggle2.onclick = function (){
+            content.classList.toggle("active")
+        }
+
+
+    </script>
+
+</body>
+</html>
