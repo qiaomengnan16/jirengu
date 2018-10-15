@@ -1,0 +1,11 @@
+body {
+    height: 100vh;
+}
+
+.cover {
+    background: url(http://cloud.hunger-valley.com/17-9-22/87786461.jpg)  center center no-repeat;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    filter: blur(5px);
+}
