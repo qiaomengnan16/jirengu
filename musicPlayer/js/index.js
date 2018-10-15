@@ -34,9 +34,17 @@ audio.onplay = function () {
         sec = sec.length === 2 ? sec : '0' + sec
         $('.musicbox .time').innerText = min + ':' + sec
     },1000)
-    $('.list').children[currentIndex].classList.add('selected')
-    this.querySelector('.fa').classList.remove('fa-play')
-    this.querySelector('.fa').classList.add('fa-pause')
+
+
+    for(var index = 0; index < $('.list').children.length ; index++ ){
+        var value = $('.list').children[index]
+        if(index == currentIndex)
+            value.classList.add('selected')
+        else
+            value.classList.remove('selected')
+    }
+    $('.musicbox .play').querySelector('.fa').classList.remove('fa-play')
+    $('.musicbox .play').querySelector('.fa').classList.add('fa-pause')
 
 }
 
@@ -45,7 +53,7 @@ audio.onpause = function () {
 }
 
 audio.onended = function () {
-    currentIndex = ( musicList.length +  --currentIndex) % musicList.length
+    currentIndex = ++currentIndex % musicList.length
     loadMusic(currentIndex)
 }
 
