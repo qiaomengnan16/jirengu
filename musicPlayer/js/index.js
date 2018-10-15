@@ -35,6 +35,8 @@ audio.onplay = function () {
         $('.musicbox .time').innerText = min + ':' + sec
     },1000)
     $('.list').children[currentIndex].classList.add('selected')
+    this.querySelector('.fa').classList.remove('fa-play')
+    this.querySelector('.fa').classList.add('fa-pause')
 
 }
 
