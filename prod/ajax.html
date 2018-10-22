@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+    <script src="jquery.js"></script>
+    <script>
+
+
+//        $.ajax({
+//            //请求的url
+//            url: 'data.json',
+//            //请求的参数
+//            data: {
+//                username: 'jirengu'
+//            },
+//            //请求的类型
+//            type: 'GET',
+//            //返回的数据类型
+//            dataType: 'json'
+//        }).done(function(ret){
+//            console.log('done')
+//            //请求成功的函数
+//            console.log(ret)
+//        }).fail(function(){
+//            //请求失败的函数
+//            console.log('fail')
+//        }).always(function(){
+//            //不管请求成功或者失败都执行的函数
+//            console.log('always')
+//        })
+//
+//
+//        $.get('data.json').done(function(ret){
+//            console.log('done')
+//            //请求成功的函数
+//            console.log(ret)
+//        })
+
+        $.getJSON('data.json').done(function(ret){
+            console.log('done')
+            //请求成功的函数
+            console.log(ret)
+        })
+
+
+    </script>
+</body>
+</html>
