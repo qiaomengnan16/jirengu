@@ -129,7 +129,7 @@ $(function () {
             _this.isLoading = true
             _this.showLoading()
             $.ajax({
-                url : 'http://api.douban.com/v2/movie/top250',
+                url : 'https://api.douban.com/v2/movie/top250',
                 data : {
                     start : _this.index || 0
                 },
@@ -171,7 +171,7 @@ $(function () {
             var tpl = '<div class="item"> \
                 <a href="#"> \
                     <div class="cover"> \
-                       <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p480747492.jpg"/> \
+                       <img src="https://img7.doubanio.com/view/photo/s_ratio_poster/public/p480747492.jpg"/> \
                     </div> \
                     <div class="detail"> \
                         <h2>霸王别姬</h2> \
@@ -233,7 +233,7 @@ $(function () {
             _this.isLoading = true
             _this.showLoading()
             $.ajax({
-                url : 'http://api.douban.com/v2/movie/us_box',
+                url : 'https://api.douban.com/v2/movie/us_box',
                 dataType : 'jsonp'
             }).done(function(ret){
                 callback && callback(ret)
@@ -290,7 +290,7 @@ $(function () {
             var _this = this
             _this.showLoading()
             $.ajax({
-                url : 'http://api.douban.com/v2/movie/search',
+                url : 'https://api.douban.com/v2/movie/search',
                 dataType : 'jsonp',
                 data : {
                     q : keyword
