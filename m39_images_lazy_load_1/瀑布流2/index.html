@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ul,li {
+            list-style: none;
+        }
+
+
+        .wrap {
+            width: 900px;
+            margin: 0 auto;
+        }
+
+        .clearfix:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        #pic-ct {
+            position: relative;
+        }
+
+
+        #pic-ct .item {
+            position: absolute;
+            padding: 0 0 10px 0;
+            width: 280px;
+            margin: 10px;
+            border: 1px solid #dfdfdf;
+            background: #fff;
+            opacity: 1;
+            transition: all .8s;
+        }
+
+        #pic-ct .item img {
+            margin: 10px;
+            width: 260px;
+        }
+
+        #pic-ct .item .header {
+            height: 25px;
+            margin: 0 12px;
+            border-bottom: 1px solid #dbdbdb;
+        }
+
+        #pic-ct .desp {
+            font-size: 12px;
+            line-height: 1.8;
+            margin: 10px 15px 0 10px;
+            color: #777371;
+        }
+
+        #load {
+            visibility: hidden;
+            height: 20px;
+        }
+
+        .hide {
+            display: none;
+        }
+
+
+
+
+
+    </style>
+</head>
+<body>
+
+    <div class="wrap">
+        <div class="ct-waterfall">
+            <ul id="pic-ct" class="clearfix">
+                <li class="item hide">
+                    <a href="#" class="link">
+                        <img src="http://n.sinaimg.cn/tech/transform/200/w600h400/20181030/Va_z-hnaivxq6121816.jpg">
+                    </a>
+                    <h4 class="header">标题</h4>
+                    <p class="desp">当地时间</p>
+                </li>
+            </ul>
+            <div id="load"></div>
+        </div>
+    </div>
+
+    <script src="../jquery.min.js"></script>
+    <script>
+
+        var curPage = 1
+        var perPageCount = 10
+        var isDataArrive = true
+
+
+        $(window).scroll(function(){
+            if(!isDataArrive) return
+
+            if(isVisible($('#load'))){
+                start()
+            }
+
+        })
+
+
+
+        start()
+
+
+        function start() {
+            getData(function(newsList){
+                isDataArrive = true
+                $.each(newsList,function(index,news){
+                    var $node = getNode(news)
+                    console.log($node)
+                    $node.find('img').load(function () {
+                        $('#pic-ct').append($node)
+                        waterFallPlace($node)
+                    })
+                })
+            })
+            isDataArrive = false
+        }
+
+
+
+        function getData(callback){
+            $.ajax({
+                url: 'http://platform.sina.com.cn/slide/album_tech',
+                dataType: 'jsonp',
+                jsonp: 'jsoncallback',
+                data: {
+                    app_key: '1271687855',
+                    num: perPageCount,
+                    page: curPage
+                }
+            }).done(function(ret){
+                if(ret && ret.status && ret.status.code === '0'){
+                    callback(ret.data)
+                    curPage ++
+                }else{
+                    console.log('get error data')
+                }
+            })
+        }
+
+        function getNode(item) {
+            var tpl = '' +
+                '<li class="item">' +
+                '<a href="'+item.url+'" class="link"> <img src="'+item.img_url+'" alt=""/> </a>' +
+                '<h4 class="header">'+item.short_name+'</h4>' +
+                '<p class="desp">'+item.short_intro+'</p>' +
+                '</li>'
+            return $(tpl)
+        }
+
+
+        function isVisible($el) {
+            var scrollH = $(window).scrollTop(),
+                winH = $(window).height(),
+                top = $el.offset().top
+
+            if(top < winH + scrollH)
+                return true
+
+            return  false
+
+        }
+
+
+
+
+        var colSumHeight = []
+        var nodeWidth = $('.item').outerWidth(true)
+        var colNum = parseInt($('#pic-ct').width() / nodeWidth)
+
+        for(var i = 0 ; i < colNum ; i++ ){
+            colSumHeight.push(0)
+        }
+
+        function waterFallPlace($node) {
+
+            var $cur = $node
+            var index = 0
+            var minHeight = colSumHeight[0]
+            for(var i = 0 ; i < colSumHeight.length ; i++ ){
+                if(colSumHeight[i] <  minHeight){
+                    minHeight = colSumHeight[i]
+                    index = i
+                }
+            }
+            $cur.css({
+                left: nodeWidth * index,
+                top: minHeight,
+                opacity: 1
+            })
+            colSumHeight[index] = $cur.outerHeight(true) + colSumHeight[index]
+
+        }
+
+
+
+    </script>
+
+</body>
+</html>
