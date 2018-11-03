@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        function People(name){
+            this.name = name;
+        }
+
+        People.prototype.walk = function () {
+            console.log(this.name  + 'is walking')
+        }
+
+        var p1 = new People('饥人谷')
+        var p2 = new People('前端')
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
