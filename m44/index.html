@@ -280,9 +280,20 @@
             }
         }
 
-        new Carousel($('.carousel').eq(0))
-        new Carousel($('.carousel').eq(1))
-        new Carousel($('.carousel').eq(2))
+
+        $.fn.carousel = function () {
+            $.each(this,function (index,node) {
+                new Carousel($(node))
+            })
+        }
+
+
+        $('.carousel').carousel()
+
+//
+//        new Carousel($('.carousel').eq(0))
+//        new Carousel($('.carousel').eq(1))
+//        new Carousel($('.carousel').eq(2))
 
 
     </script>
